@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "931878255245",
+    "project_id": "rent-last",
+    "storage_bucket": "rent-last.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:931878255245:android:d843b20c3337385f5c00c4",
+        "android_client_info": {
+          "package_name": "com.example.car_rent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "931878255245-hv7m3ggaeepf8tam0i8bjgfq670aogt4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgAVutMn3zNtR0k3ghRnN_ABrpjuOnqow"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "931878255245-hv7m3ggaeepf8tam0i8bjgfq670aogt4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "931878255245-kkbob3g2d02850dc5pio6orj9e20533g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.carRent"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
