@@ -1,4 +1,4 @@
-# renacarapp
+# rentacarapp
 
 This is a car rental project.
 
