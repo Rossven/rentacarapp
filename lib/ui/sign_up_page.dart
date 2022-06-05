@@ -6,6 +6,7 @@ import 'package:car_rent/components/text_fields.dart';
 import 'package:car_rent/ui/pick_up_page.dart';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key? key}) : super(key: key);
@@ -148,6 +149,14 @@ Future signUp(context) async {
               email: emailController.text, password: passwordController.text)
           .then((value) {
         print("Created New Account");
+        Fluttertoast.showToast(
+            msg: "Created New Account",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.green,
+            textColor: Colors.white,
+            fontSize: 16.0);
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => SignInPage()));
       });
@@ -155,6 +164,15 @@ Future signUp(context) async {
       if (e.code == 'weak-password') {
         throw Exception('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
+        Fluttertoast.showToast(
+            msg: "Email already used.",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+
         throw Exception('The account already exists for that email.');
       }
     } catch (e) {
@@ -162,7 +180,18 @@ Future signUp(context) async {
     }
   } else {
     print("unmatch passwords");
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => SignUpPage()));
+    Fluttertoast.showToast(
+        msg: "Passwords do not match.",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => SignUpPage()),
+      (Route<dynamic> route) => false,
+    );
   }
 }

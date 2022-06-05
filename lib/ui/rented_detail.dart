@@ -7,6 +7,7 @@ import 'package:car_rent/ui/rented_page.dart';
 import 'package:car_rent/ui/sign_in_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 
 class rentedDetail extends StatelessWidget {
@@ -21,7 +22,8 @@ class rentedDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: blackColor,
-        body: Column(children: [
+        body: SingleChildScrollView(
+            child: Column(children: [
           Container(
               color: whiteColor,
               child: Column(children: [
@@ -181,12 +183,15 @@ class rentedDetail extends StatelessWidget {
                     DiscardNow(car, context);
                   },
                   //elevation: 5.0,
-                  child: const Text(
-                    "Discard",
-                    style: TextStyle(
-                      color: blackColor,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w800,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: const Text(
+                      "Discard",
+                      style: TextStyle(
+                        color: blackColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
+                      ),
                     ),
                   ),
                   color: orangeColor,
@@ -196,8 +201,8 @@ class rentedDetail extends StatelessWidget {
                 ),
               ],
             ),
-          )
-        ]));
+          ),
+        ])));
   }
 }
 
@@ -210,6 +215,14 @@ void DiscardNow(Car car, context) {
       .collection('cars')
       .doc(car.docId)
       .update({'isRented': "false"});
+  Fluttertoast.showToast(
+      msg: "Discard Successful",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.green,
+      textColor: Colors.white,
+      fontSize: 16.0);
   Navigator.pushAndRemoveUntil(
     context,
     MaterialPageRoute(

@@ -43,6 +43,7 @@ dependencies:
   equatable: ^2.0.3
   localstorage: 
   intl:
+  fluttertoast: ^8.0.9
 
 dev_dependencies:
   flutter_test:

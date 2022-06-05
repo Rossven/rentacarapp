@@ -5,12 +5,14 @@ import 'package:car_rent/ui/sign_up_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:car_rent/ui/forgot_password_page.dart';
 import 'package:car_rent/components/colors.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:flutter/material.dart';
 
 import 'forgot_password_page.dart';
 
 dynamic userEmail = "asd";
+dynamic errorcode = "";
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -71,6 +73,7 @@ class _SignInPageState extends State<SignInPage> {
               height: 35.0,
             ),
             buildPasswordTF(),
+            Text(errorcode),
             Container(
               alignment: Alignment.centerRight,
               child: Padding(
@@ -162,11 +165,44 @@ Future signIn(context) async {
       );
     });
     userEmail = emailController.text;
+    Fluttertoast.showToast(
+        msg: "Login Successful.",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0);
   } on FirebaseAuthException catch (e) {
     if (e.code == 'user-not-found') {
-      throw Exception('No user found for that email.');
+      Fluttertoast.showToast(
+          msg: "No user found for that email.",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+      errorcode = "No user found for that email.";
     } else if (e.code == 'wrong-password') {
-      throw Exception('Wrong password provided for that user.');
+      errorcode = "Wrong password provided for that user.";
+      Fluttertoast.showToast(
+          msg: "Wrong password provided for that user.",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    } else if (e.code == 'invalid-email') {
+      Fluttertoast.showToast(
+          msg: "Email address is invalid.",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
     }
   }
 }
